@@ -1,0 +1,44 @@
+@import "../bower_components/bourbon/dist/bourbon";
+@import url(http://fonts.googleapis.com/css?family=Luckiest+Guy);
+
+* { @include box-sizing(border-box); }
+
+body {
+    background-color: #ddd;
+}
+
+header {
+    margin:auto;
+    width:480px;
+}
+
+h1 {
+    font-family: 'Luckiest Guy', Tahoma, sans-serif;
+    font-size: 3.8em;
+    letter-spacing: .25em;
+    color: darkred;
+    display: block;
+    padding: 10px 0 30px 0;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Luckiest Guy', Tahoma, sans-serif;
+    letter-spacing: .15em;
+}
+
+button {
+    @include button(shiny, darkred);
+    color: whitesmoke;
+    margin: 5% 50% 5% 50%;
+    width: 150px;
+    margin: 0 165px 0 165px;
+  }
+
+.dog-action {
+    @extend button;
+    margin: 20px 165px 0 165px;
+    clear: both;
+    width: 200px;
+    float:left;
+}
