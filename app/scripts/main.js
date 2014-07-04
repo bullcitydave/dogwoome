@@ -135,7 +135,7 @@ if (emily.licked) {
     }
 
 
-var dogname = "moksha";
+var dogname = '';
 
 var dogposition = jQuery.inArray(dogname,dogNames);
 
@@ -144,6 +144,14 @@ var adoptername = "emily";
 
 
 var adopterposition = jQuery.inArray(adoptername,adopterNames);
+
+
+$('.dog-selection-entry').click(function() {
+    dogname = $(this).children("button").html();
+    $('#select-player').hide(750);
+    $('#main-game').css('opacity',1);
+  }
+);
 
 
 
