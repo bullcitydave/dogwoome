@@ -86,9 +86,19 @@ var emily = new Adopter("emily",{
 
 var Adopters = ([dave,emily]);
 
+var adopterNames = Adopters.map(function (adopter) {
+    return adopter.name;
+});
+
 var Dogs = ([moksha,bella,emmitt,herman]); // populate these automatically based on dogs defined
 
-var wa =  cartesianProductOf(Dogs,Adopters);
+var dogNames = Dogs.map(function (dog) {
+    return dog.name;
+});
+
+var Zeroes = [0];
+
+var wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
 
 // function wooArray (dogs,adopters){
 //     var wa = [];
@@ -122,28 +132,38 @@ if (emily.licked) {
 
 
 var dogname = "moksha";
-var dogsNames = Dogs.map(function (dog) {
-    return dog.name;
-});
 
-var dogposition = jQuery.inArray(dogname,dogsNames);
+var dogposition = jQuery.inArray(dogname,dogNames);
 
 
 var adoptername = "emily";
-var adopterNames = Adopters.map(function (adopter) {
-    return adopter.name;
-});
+
 
 var adopterposition = jQuery.inArray(adoptername,adopterNames);
 
 
-$('#lick').click(function(dogname,) {
 
-   ws = new WooScore (dogname, adoptername,5);
-   return alert(dogposition + 'licked ' + adopterposition);
+$('#lick').click(function() {
+    dogPos = $.inArray(dogname,dogNames);
+    adopterPos = $.inArray(adoptername,adopterNames);
+   $.each(wa, function(index,e)  {
+        //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
+       if ((e[0] === dogname) && (e[1] === adoptername)) {
+       console.log(wa[index][2]);
+       wa[index][2] += 5;
+       if (wa[index][2] >= 100) {
+         win(wa[index]);
+       }
+     }
+   });
+    // wa[dogPos][adopterPos]
+
+   return alert(dogname + ' licked ' + adoptername + ' : +5 points');
 });
 
-
+function win(dogAndAdopter){
+  alert(dogAndAdopter[1] + ' wants to adopt ' + dogAndAdopter[0] + '!');
+}
 
 
 
