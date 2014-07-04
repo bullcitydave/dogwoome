@@ -149,24 +149,35 @@ $('#lick').click(function() {
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
-       console.log(wa[index][2]);
-       wa[index][2] += 5;
-       if (wa[index][2] >= 100) {
-         win(wa[index]);
-       }
-     }
+           console.log(wa[index][2]);
+           wa[index][2] += 5;
+           moveProgress(5);
+           if (wa[index][2] >= 100) {
+               win(wa[index]);
+           }
+        }
    });
     // wa[dogPos][adopterPos]
 
-   return alert(dogname + ' licked ' + adoptername + ' : +5 points');
+  //  return alert(dogname + ' licked ' + adoptername + ' : +5 points');
 });
 
 function win(dogAndAdopter){
   alert(dogAndAdopter[1] + ' wants to adopt ' + dogAndAdopter[0] + '!');
+  resetGame();
 }
 
+function moveProgress(widthChange){
+   var totalBarWidth = parseInt($(".woobar").css('width'));
+   var progWidth = parseInt($(".woobarprog").css('width'));
+   var newWidth = (progWidth + (totalBarWidth*(widthChange/100))) + 'px';
+   $(".woobarprog").css('width', newWidth);
+}
 
-
+function resetGame(){
+   $(".woobarprog").css('width',0);
+   wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
+}
 
 // var finddog = $.grep(Dogs, function(e){ return e.name == dogname; });
 //
