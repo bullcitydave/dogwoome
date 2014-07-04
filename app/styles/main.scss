@@ -3,6 +3,10 @@
 
 * { @include box-sizing(border-box); }
 
+$small-avatar      :  75px;
+$primary-font      :  'Luckiest Guy', Tahoma, sans-serif;
+$secondary-font    :  Tahoma, sans-serif;
+
 body {
     background-color: #ddd;
     // @include background-image(linear-gradient(white 0, yellow 50%, transparent 50%));
@@ -10,11 +14,11 @@ body {
 
 header {
     margin:auto;
-    width:480px;
+    width:800px;
 }
 
 h1 {
-    font-family: 'Luckiest Guy', Tahoma, sans-serif;
+    font-family: $primary-font;
     font-size: 3.8em;
     letter-spacing: .25em;
     color: darkred;
@@ -25,9 +29,14 @@ h1 {
 }
 
 h2 {
-    font-family: 'Luckiest Guy', Tahoma, sans-serif;
+    font-family: $primary-font;
     letter-spacing: .15em;
 }
+
+p {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+  }
 
 button {
     @include button(shiny, darkred);
@@ -39,7 +48,7 @@ button {
 
 .dog-action {
     @extend button;
-    margin: 20px 165px 0 165px;
+    margin: 20px 75px 0 25px;
     clear: both;
     width: 200px;
     float:left;
@@ -52,35 +61,50 @@ section#sidebar {
   float:left;
 }
 
-section#progress {
+section#adoption-progress {
   float:left;
+  margin: 30px 25px 25px 30px;
 }
 
-
+div.adopter-avatar {
+    float:left;
+    @include size($small-avatar $small-avatar);
+    img {
+        @include size($small-avatar $small-avatar);
+        border-radius: 25px 0 0 25px;
+    }
+}
 
 
 div.woobarprog {
-  float:left;
-  transition: all 0.5s ease;
-  font-family: 'Play';
-  font-size: 25px;
-  text-transform: uppercase;
-  // padding: 5px 10px 5px 15px;
-  border-radius: 0 25px 25px 0;
-  margin:0;
-  opacity:.7;
-  background: orange;
-  font-size: 35px;
-  letter-spacing: 5px;
-  width: 0px;
-  opacity: 1.0;
-  height: 40px;
+    float:left;
+    transition: all 0.5s ease;
+    font-size: 25px;
+    text-transform: uppercase;
+    // padding: 5px 10px 5px 15px;
+    border-radius: 0 25px 25px 0;
+    margin:0;
+    opacity:.7;
+    background: orange;
+    font-size: 35px;
+    letter-spacing: 5px;
+    width: 0px;
+    opacity: 1.0;
+    height: 40px;
 }
 
 div.woobar {
-  @extend .woobarprog;
-  background: darkred;
-  z-index:100;
-  width:440px;
-  padding: 0;
+    @extend .woobarprog;
+    background: darkred;
+    z-index:100;
+    width:440px;
+    padding: 0;
+}
+
+p.progress-percentage {
+    clear: left;
+    float: right;
+    font-family: $primary-font;
+    margin: 5px 10px 0 0;
+    font-size: 1em;
 }

@@ -152,6 +152,7 @@ $('#lick').click(function() {
            console.log(wa[index][2]);
            wa[index][2] += 5;
            moveProgress(5);
+           $(".percent").html(wa[index][2]);
            if (wa[index][2] >= 100) {
                win(wa[index]);
            }
