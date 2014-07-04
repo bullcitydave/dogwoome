@@ -49,6 +49,10 @@ function WooScore (dogname, adoptername, score) {
 }
 
 
+// INITIALIZE GAME
+// onload
+
+$("#main-game").css('opacity',.25);
 
 
 
@@ -177,7 +181,9 @@ function moveProgress(widthChange){
 
 function resetGame(){
    $(".woobarprog").css('width',0);
+   $(".main-game").css('opacity',.25);
    wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
+
 }
 
 // var finddog = $.grep(Dogs, function(e){ return e.name == dogname; });
@@ -189,6 +195,10 @@ function resetGame(){
 
 
 
+// INITIALIZE GAME
+// onload
+
+$("#main-game").css('opacity',.25);
 
 
 
