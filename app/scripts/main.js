@@ -31,6 +31,9 @@ function Dog (name, options) {
    this.barkVol = options.barkVol || 'normal';
    this.lick = function(adopter) {
        return adopter.licked = true;
+   }
+   this.cuddle = function(adopter) {
+       return adopter.cuddled = true;
    };
 }
 
@@ -38,7 +41,9 @@ function Adopter (name, options) {
    options = options || {};
    this.name = name;
    this.licked = false;
+   this.cuddled = false;
    this.tolLick = 5;
+   this.tolCuddle = 5;
    this.prefAge = options.prefAge;
 }
 
@@ -104,41 +109,9 @@ var Zeroes = [0];
 
 var wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
 
-// function wooArray (dogs,adopters){
-//     var wa = [];
-//     var dogIndex;
-//     $.each(dogs, function (index,adopters) {
-//       dogIndex = index;
-//       $.each(adopters, function(index,dogIndex) {
-//         console.log('index = ' + index);
-//         console.log('dogIndex = ' + dogIndex);
-//           wa[dogIndex][index] = 0;
-//         });
-//     });
-//     return wa;
-// }
-
-
-
-
-moksha.lick(dave);
-
-moksha.lick(emily);
-
-
-if (dave.licked) {
-    console.log(dave.name + " was licked!")
-    }
-
-if (emily.licked) {
-    console.log(emily.name + " was licked!")
-    }
-
-
 var dogname = '';
 
 var dogposition = jQuery.inArray(dogname,dogNames);
-
 
 var adoptername = "emily";
 
@@ -170,16 +143,64 @@ $('#lick').click(function() {
            }
         }
    });
-    // wa[dogPos][adopterPos]
-
-  //  return alert(dogname + ' licked ' + adoptername + ' : +5 points');
 });
+
+$('#cuddle').click(function() {
+    dogPos = $.inArray(dogname,dogNames);
+    adopterPos = $.inArray(adoptername,adopterNames);
+   $.each(wa, function(index,e)  {
+        //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
+       if ((e[0] === dogname) && (e[1] === adoptername)) {
+           console.log(wa[index][2]);
+           wa[index][2] += 10;
+           moveProgress(10);
+           $(".percent").html(wa[index][2]);
+           if (wa[index][2] >= 100) {
+               win(wa[index]);
+           }
+        }
+   });
+});
+
+$('#bark').click(function() {
+    dogPos = $.inArray(dogname,dogNames);
+    adopterPos = $.inArray(adoptername,adopterNames);
+   $.each(wa, function(index,e)  {
+        //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
+       if ((e[0] === dogname) && (e[1] === adoptername)) {
+           console.log(wa[index][2]);
+           wa[index][2] -= 4;
+           moveProgress(-4);
+           $(".percent").html(wa[index][2]);
+           if (wa[index][2] >= 100) {
+               console.log(wa[index][2]);
+               if (wa[index][2] > 100) {
+                   wa[index][2] = 100;
+                   console.log(wa[index][2]);
+                   $(".percent").html(wa[index][2]);
+                 }
+               win(wa[index]);
+           }
+           if (wa[index][2] < 0) {
+               wa[index][2] = 0;
+               $(".percent").html(wa[index][2]);
+               lose(wa[index]);
+           }
+        }
+   });
+});
+
+
 
 function win(dogAndAdopter){
   alert(dogAndAdopter[1] + ' wants to adopt ' + dogAndAdopter[0] + '!');
   resetGame();
 }
 
+function lose(dogAndAdopter){
+  alert(dogAndAdopter[1] + ' doesn\'t want to adopt ' + dogAndAdopter[0] + ' today. Maybe some other time.');
+  resetGame();
+}
 function moveProgress(widthChange){
    var totalBarWidth = parseInt($(".woobar").css('width'));
    var progWidth = parseInt($(".woobarprog").css('width'));
