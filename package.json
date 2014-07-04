@@ -15,6 +15,7 @@
   ],
   "author": "Dave Seidman",
   "license": "MIT",
+  "main": "index.html",
   "devDependencies": {
     "connect": "^2.14.4",
     "connect-livereload": "^0.4.0",

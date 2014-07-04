@@ -49,6 +49,10 @@ function WooScore (dogname, adoptername, score) {
 }
 
 
+// INITIALIZE GAME
+// onload
+
+$("#main-game").css('opacity',.25);
 
 
 
@@ -131,7 +135,7 @@ if (emily.licked) {
     }
 
 
-var dogname = "moksha";
+var dogname = '';
 
 var dogposition = jQuery.inArray(dogname,dogNames);
 
@@ -140,6 +144,14 @@ var adoptername = "emily";
 
 
 var adopterposition = jQuery.inArray(adoptername,adopterNames);
+
+
+$('.dog-selection-entry').click(function() {
+    dogname = $(this).children("button").html();
+    $('#select-player').hide(750);
+    $('#main-game').css('opacity',1);
+  }
+);
 
 
 
@@ -177,7 +189,9 @@ function moveProgress(widthChange){
 
 function resetGame(){
    $(".woobarprog").css('width',0);
+   $(".main-game").css('opacity',.25);
    wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
+
 }
 
 // var finddog = $.grep(Dogs, function(e){ return e.name == dogname; });
@@ -189,6 +203,10 @@ function resetGame(){
 
 
 
+// INITIALIZE GAME
+// onload
+
+$("#main-game").css('opacity',.25);
 
 
 
