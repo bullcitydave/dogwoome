@@ -48,9 +48,9 @@ function Adopter (name, options) {
    this.name = name;
    this.licked = false;
    this.cuddled = false;
-   this.tolLick = 5;
-   this.tolCuddle = 5;
-   this.tolBark = 5;
+   this.tolLick = options.tolLick || 5;
+   this.tolCuddle = options.tolCuddle || 5;
+   this.tolBark = options.tolBark || 5;
    this.prefAge = options.prefAge;
    this.avatar = options.avatar;
 }
@@ -99,11 +99,13 @@ var herman = new Dog("herman",{
 
 var dave = new Adopter("dave",{
     tolLick: 7,
+    tolCuddle: 4,
     avatar: 'https://dge9rmgqjs8m1.cloudfront.net/global/6e784a56292505372595b9023b9cdc970010/original.6e784a56292505372595b9023b9cdc970010.gif'
 });
 
 var emily = new Adopter("emily",{
     tolLick: 4,
+    tolCuddle: 6,
     avatar: 'https://asset1.basecamp.com/1940253/people/8112581/photo/avatar.96.gif'
 })
 
@@ -129,7 +131,7 @@ var dogNames = Dogs.map(function (dog) {
 
 var wooScores = [0];
 
-var wooData = [{wooScore: 0, totalLicks: 0}];
+var wooData = [{wooScore: 0, totalLicks: 0, totalCuddles: 0, totalBarks: 0}];
 
 // var wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
 var wa =  cartesianProductOf(dogNames,adopterNames, wooData);
@@ -176,15 +178,23 @@ $('.adopter-selection-entry').click(function() {
 $('#lick').click(function() {
     dogPos = $.inArray(dogname,dogNames);
     adopterPos = $.inArray(adoptername,adopterNames);
+    var maxLicks = Adopters[adopterPos].tolLick;
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
            console.log(wa[index][2].wooScore);
-           wa[index][2].wooScore += 5;
-           moveProgress(5);
-           $(".percent").html(wa[index][2].wooScore);
-           if (wa[index][2].wooScore >= 100) {
-               win(wa[index]);
+           if (wa[index][2].totalLicks < maxLicks) {
+               wa[index][2].wooScore += 5;
+               wa[index][2].totalLicks++;
+               moveProgress(5);
+               $(".percent").html(wa[index][2].wooScore);
+               if (wa[index][2].wooScore >= 100) {
+                   win(wa[index]);
+               }
+           }
+           else {
+               alert('That\'s enough licks for now!');
+               $("#lick").css('opacity',.25);
            }
         }
    });
@@ -193,16 +203,24 @@ $('#lick').click(function() {
 $('#cuddle').click(function() {
     dogPos = $.inArray(dogname,dogNames);
     adopterPos = $.inArray(adoptername,adopterNames);
+    var maxCuddles = Adopters[adopterPos].tolCuddle;
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
-           console.log(wa[index][2].wooScore);
-           wa[index][2].wooScore += 10;
-           moveProgress(10);
-           $(".percent").html(wa[index][2].wooScore);
-           if (wa[index][2].wooScore >= 100) {
-               win(wa[index]);
-           }
+           if (wa[index][2].totalCuddles <= maxCuddles) {
+               wa[index][2].totalCuddles++;
+               console.log(wa[index][2].wooScore);
+               wa[index][2].wooScore += 10;
+               moveProgress(10);
+               $(".percent").html(wa[index][2].wooScore);
+               if (wa[index][2].wooScore >= 100) {
+                   win(wa[index]);
+               }
+            }
+            else {
+                alert('That\'s enough cuddles for now!');
+                $("#cuddle").css('opacity',.25);
+            }
         }
    });
 });
@@ -257,9 +275,10 @@ function resetGame(){
    $(".woobarprog").css('width',0);
    $(".percent").html(0);
    $(".main-game").css('opacity',.25);
-   wooScores = [0];
+   wooData = [0];
    wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
    $('#select-player').show(750);
+
 
 }
 
