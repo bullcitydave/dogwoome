@@ -29,12 +29,16 @@ function Dog (name, options) {
    this.colors = options.colors;
    this.weight = options.weight;
    this.barkVol = options.barkVol || 'normal';
+   this.avatar = options.avatar;
    this.lick = function(adopter) {
        return adopter.licked = true;
    }
    this.cuddle = function(adopter) {
        return adopter.cuddled = true;
    };
+   this.bark = function(adopter) {
+       return adopter.barkedAt = true;
+   }
 }
 
 function Adopter (name, options) {
@@ -44,7 +48,9 @@ function Adopter (name, options) {
    this.cuddled = false;
    this.tolLick = 5;
    this.tolCuddle = 5;
+   this.tolBark = 5;
    this.prefAge = options.prefAge;
+   this.avatar = options.avatar;
 }
 
 function WooScore (dogname, adoptername, score) {
@@ -65,7 +71,8 @@ $("#main-game").css('opacity',.25);
 
 var moksha = new Dog("moksha",{
   color: ["brown","white"],
-  age: 4
+  age: 4,
+  avatar: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/t31.0-8/1932629_10152418870378352_6293108892780372302_o.jpg'
 });
 
 var bella = new Dog("bella",{
@@ -75,7 +82,8 @@ var bella = new Dog("bella",{
 
 var emmitt = new Dog("emmitt",{
   color: ["yellow"],
-  age: 5
+  age: 5,
+  avatar: 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xap1/t1.0-9/60479_432375844549_1903986_n.jpg'
 });
 
 var herman = new Dog("herman",{
@@ -86,10 +94,20 @@ var herman = new Dog("herman",{
 // ADOPTERS
 
 var dave = new Adopter("dave",{
-    tolLick: 10
-})
+    tolLick: 10,
+    avatar: 'https://dge9rmgqjs8m1.cloudfront.net/global/6e784a56292505372595b9023b9cdc970010/original.6e784a56292505372595b9023b9cdc970010.gif'
+});
 
 var emily = new Adopter("emily",{
+    tolLick: 2,
+    avatar: 'https://asset1.basecamp.com/1940253/people/8112581/photo/avatar.96.gif'
+})
+
+var julia = new Adopter("julia",{
+    tolLick: 10,
+})
+
+var justin = new Adopter("justin",{
     tolLick: 2
 })
 
@@ -111,20 +129,31 @@ var wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
 
 var dogname = '';
 
-var dogposition = jQuery.inArray(dogname,dogNames);
+var adoptername = '';
 
-var adoptername = "emily";
-
-
-var adopterposition = jQuery.inArray(adoptername,adopterNames);
 
 
 $('.dog-selection-entry').click(function() {
     dogname = $(this).children("button").html();
     $('#select-player').hide(750);
-    $('#main-game').css('opacity',1);
+    $('#select-adopter').show(750);
   }
 );
+
+
+$('.adopter-selection-entry').click(function() {
+    adoptername = $(this).children("button").html();
+    $('#select-adopter').hide(750);
+    $('#main-game').css('opacity',1);
+    $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
+});
+
+// for (var i = 0, len = Adopters.length; i < len; i++) {
+//     if (Adopters[i].name === "emily") {
+//         // match is in array[i]
+//         console.log(i);
+//     }
+// }
 
 
 
