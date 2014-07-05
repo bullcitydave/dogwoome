@@ -20,6 +20,8 @@
 
 // CONSTRUCTORS
 
+"use strict";
+
 function Dog (name, options) {
    options = options || {};
    this.name = name;
@@ -117,7 +119,7 @@ var adopterNames = Adopters.map(function (adopter) {
     return adopter.name;
 });
 
-var Dogs = ([moksha,bella,emmitt,herman]); // populate these automatically based on dogs defined
+var Dogs = ([moksha,emmitt,bella,herman]); // populate these automatically based on dogs defined
 
 var dogNames = Dogs.map(function (dog) {
     return dog.name;
@@ -134,9 +136,12 @@ var adoptername = '';
 
 
 $('.dog-selection-entry').click(function() {
-    dogname = $(this).children("button").html();
+    dogname = $(this).children("button").html(); // need a better way but returning value isn't wrorking
+    // var dogid = eval(($(this).attr('id')));
     $('#select-player').hide(750);
     $('#select-adopter').show(750);
+    // var dogid = eval($(event.target).html());
+    // var dogid = eval(dogname);
   }
 );
 
@@ -144,6 +149,8 @@ $('.dog-selection-entry').click(function() {
 $('.adopter-selection-entry').click(function() {
     adoptername = $(this).children("button").html();
     $('#select-adopter').hide(750);
+    $('')
+    // eval('$(\'#' + dogselectionid + '\')'  ).show();
     $('#main-game').css('opacity',1);
     $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
 });
@@ -175,8 +182,8 @@ $('#lick').click(function() {
 });
 
 $('#cuddle').click(function() {
-    dogPos = $.inArray(dogname,dogNames);
-    adopterPos = $.inArray(adoptername,adopterNames);
+    var dogPos = $.inArray(dogname,dogNames);
+    var adopterPos = $.inArray(adoptername,adopterNames);
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
