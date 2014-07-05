@@ -55,10 +55,12 @@ function Adopter (name, options) {
    this.avatar = options.avatar;
 }
 
-function WooScore (dogname, adoptername, score) {
+// not sure if I will use this
+function WooScore (dogname, adoptername) {
    this.dogname = dogname;
    this.adoptername = adoptername;
-   this.score = score;
+   this.score = 0;
+   this.licks = 0;
 }
 
 
@@ -127,7 +129,10 @@ var dogNames = Dogs.map(function (dog) {
 
 var wooScores = [0];
 
-var wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
+var wooData = [{wooScore: 0, totalLicks: 0}];
+
+// var wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
+var wa =  cartesianProductOf(dogNames,adopterNames, wooData);
 
 var dogname = '';
 var dogPos = 0;
@@ -174,11 +179,11 @@ $('#lick').click(function() {
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
-           console.log(wa[index][2]);
-           wa[index][2] += 5;
+           console.log(wa[index][2].wooScore);
+           wa[index][2].wooScore += 5;
            moveProgress(5);
-           $(".percent").html(wa[index][2]);
-           if (wa[index][2] >= 100) {
+           $(".percent").html(wa[index][2].wooScore);
+           if (wa[index][2].wooScore >= 100) {
                win(wa[index]);
            }
         }
@@ -191,11 +196,11 @@ $('#cuddle').click(function() {
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
-           console.log(wa[index][2]);
-           wa[index][2] += 10;
+           console.log(wa[index][2].wooScore);
+           wa[index][2].wooScore += 10;
            moveProgress(10);
-           $(".percent").html(wa[index][2]);
-           if (wa[index][2] >= 100) {
+           $(".percent").html(wa[index][2].wooScore);
+           if (wa[index][2].wooScore >= 100) {
                win(wa[index]);
            }
         }
@@ -208,12 +213,12 @@ $('#bark').click(function() {
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
-           console.log(wa[index][2]);
-           wa[index][2] -= 4;
+           console.log(wa[index][2].wooScore);
+           wa[index][2].wooScore -= 4;
            moveProgress(-4);
-           $(".percent").html(wa[index][2]);
+           $(".percent").html(wa[index][2].wooScore);
            if (wa[index][2] >= 100) {
-               console.log(wa[index][2]);
+               console.log(wa[index][2].wooScore);
                if (wa[index][2] > 100) {
                    wa[index][2] = 100;
                    console.log(wa[index][2]);
