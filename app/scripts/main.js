@@ -20,6 +20,8 @@
 
 // CONSTRUCTORS
 
+"use strict";
+
 function Dog (name, options) {
    options = options || {};
    this.name = name;
@@ -28,7 +30,7 @@ function Dog (name, options) {
    this.breeds = options.breeds || 'mutt';
    this.colors = options.colors;
    this.weight = options.weight;
-   this.barkVol = options.barkVol || 'normal';
+   this.barkVol = options.barkVol || 5;
    this.avatar = options.avatar;
    this.lick = function(adopter) {
        return adopter.licked = true;
@@ -94,12 +96,12 @@ var herman = new Dog("herman",{
 // ADOPTERS
 
 var dave = new Adopter("dave",{
-    tolLick: 10,
+    tolLick: 7,
     avatar: 'https://dge9rmgqjs8m1.cloudfront.net/global/6e784a56292505372595b9023b9cdc970010/original.6e784a56292505372595b9023b9cdc970010.gif'
 });
 
 var emily = new Adopter("emily",{
-    tolLick: 2,
+    tolLick: 4,
     avatar: 'https://asset1.basecamp.com/1940253/people/8112581/photo/avatar.96.gif'
 })
 
@@ -117,26 +119,33 @@ var adopterNames = Adopters.map(function (adopter) {
     return adopter.name;
 });
 
-var Dogs = ([moksha,bella,emmitt,herman]); // populate these automatically based on dogs defined
+var Dogs = ([moksha,emmitt,bella,herman]); // populate these automatically based on dogs defined
 
 var dogNames = Dogs.map(function (dog) {
     return dog.name;
 });
 
-var Zeroes = [0];
+var wooScores = [0];
 
-var wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
+var wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
 
 var dogname = '';
-
+var dogPos = 0;
 var adoptername = '';
+var adopterPos = 0;
 
 
 
 $('.dog-selection-entry').click(function() {
-    dogname = $(this).children("button").html();
+    dogname = $(this).children(".dog-selection-button").html(); // need a better way but returning value isn't working
+    dogPos = $(this).children(".index-ignore").html();
+    var dogView = $('#sidebar-template').html();
+    $('#sidebar').append(_.template(dogView,({"imgURL": Dogs[dogPos].avatar, "dogname":dogname})));
+    // var dogid = eval(($(this).attr('id')));
     $('#select-player').hide(750);
     $('#select-adopter').show(750);
+    // var dogid = eval($(event.target).html());
+    // var dogid = eval(dogname);
   }
 );
 
@@ -144,6 +153,8 @@ $('.dog-selection-entry').click(function() {
 $('.adopter-selection-entry').click(function() {
     adoptername = $(this).children("button").html();
     $('#select-adopter').hide(750);
+    $('')
+    // eval('$(\'#' + dogselectionid + '\')'  ).show();
     $('#main-game').css('opacity',1);
     $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
 });
@@ -208,7 +219,7 @@ $('#bark').click(function() {
                    console.log(wa[index][2]);
                    $(".percent").html(wa[index][2]);
                  }
-               win(wa[index]);
+               Window.setTimeout(win(wa[index]),1500);
            }
            if (wa[index][2] < 0) {
                wa[index][2] = 0;
@@ -239,8 +250,11 @@ function moveProgress(widthChange){
 
 function resetGame(){
    $(".woobarprog").css('width',0);
+   $(".percent").html(0);
    $(".main-game").css('opacity',.25);
-   wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
+   wooScores = [0];
+   wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
+   $('#select-player').show(750);
 
 }
 

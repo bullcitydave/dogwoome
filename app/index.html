@@ -39,17 +39,17 @@
             </header>
             <div class="dog-choices">
                 <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/t31.0-8/1932629_10152418870378352_6293108892780372302_o.jpg"></a>
-                    <button class="dog-selection-button">moksha</button>
+                    <button class="dog-selection-button">moksha</button><span class="index-ignore">0</span>
                 </div>
                 <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xap1/t1.0-9/60479_432375844549_1903986_n.jpg"></a>
-                    <button class="dog-selection-button">emmitt</button>
+                    <button class="dog-selection-button">emmitt</button><span class="index-ignore">1</span>
                 </div>
             </div>
         </section>
 
         <section id="select-adopter">
             <header class="modal-header">
-                <h2>Choose a potential adopter to woo</h2>
+                <h2>Choose a potential adopter</h2>
             </header>
             <div class="adopter-choices">
                 <div class="adopter-selection-entry"><a href="#"><img class="adopter-avatar-large" src="https://asset1.basecamp.com/1940253/people/8112581/photo/avatar.96.gif"></a>
@@ -62,16 +62,21 @@
         </section>
 
         <section id="main-game">
+            <!-- <section id="sidebar">
+                <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/t31.0-8/1932629_10152418870378352_6293108892780372302_o.jpg"></a>
+                    <button class="dog-selection-button">moksha</button>
+                </div>
+            </section> -->
+
             <section id="sidebar">
-                <nav id="dog-action-selections">
-                    <ul>
-                        <li class="dog-action" id="lick"><h2>LICK!</h2></li>
-                        <li class="dog-action" id="cuddle"><h2>CUDDLE!</h2></li>
-                        <li class="dog-action" id="bark"><h2>BARK!</h2></li>
-                    </ul>
-                </nav>
+            <script type="text/template" id="sidebar-template">
+                <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="<%- imgURL %>"</a>
+                    <button class="dog-selection-button"><%- dogname %></button>
+                </div>
+            </script>
             </section>
-            <section id="adoption-progress">
+
+            <section id="woo-battle">
               <div class="adopter-avatar">
                   <img src="#">
               </div>
@@ -82,6 +87,13 @@
                       <p class="progress-percentage"><span class="percent">0</span>%</p>
                   </div>
               </div>
+              <nav id="dog-action-selections">
+                  <ul>
+                      <li class="dog-action" id="lick"><h2>LICK!</h2></li>
+                      <li class="dog-action" id="cuddle"><h2>CUDDLE!</h2></li>
+                      <li class="dog-action" id="bark"><h2>BARK!</h2></li>
+                  </ul>
+              </nav>
             </section>
         </section>
 
