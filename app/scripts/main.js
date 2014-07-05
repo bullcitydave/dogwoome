@@ -30,7 +30,7 @@ function Dog (name, options) {
    this.breeds = options.breeds || 'mutt';
    this.colors = options.colors;
    this.weight = options.weight;
-   this.barkVol = options.barkVol || 'normal';
+   this.barkVol = options.barkVol || 5;
    this.avatar = options.avatar;
    this.lick = function(adopter) {
        return adopter.licked = true;
@@ -130,8 +130,9 @@ var Zeroes = [0];
 var wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
 
 var dogname = '';
-
+var dogPos = 0;
 var adoptername = '';
+var adopterPos = 0;
 
 
 
@@ -182,8 +183,8 @@ $('#lick').click(function() {
 });
 
 $('#cuddle').click(function() {
-    var dogPos = $.inArray(dogname,dogNames);
-    var adopterPos = $.inArray(adoptername,adopterNames);
+    dogPos = $.inArray(dogname,dogNames);
+    adopterPos = $.inArray(adoptername,adopterNames);
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
@@ -246,8 +247,10 @@ function moveProgress(widthChange){
 
 function resetGame(){
    $(".woobarprog").css('width',0);
+   $(".progress-percentage").html(0);
    $(".main-game").css('opacity',.25);
    wa =  cartesianProductOf(dogNames,adopterNames, Zeroes);
+   $('#select-player').show(750);
 
 }
 
