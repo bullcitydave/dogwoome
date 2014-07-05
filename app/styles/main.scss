@@ -169,3 +169,8 @@ p.progress-percentage {
     margin: 5px 10px 0 0;
     font-size: 1em;
 }
+
+// holding the index of the dog in the Dogs array, to pass to template; not ideal, but works for now
+span.index-ignore {
+  display:none;
+}
