@@ -100,12 +100,14 @@ var herman = new Dog("herman",{
 var dave = new Adopter("dave",{
     tolLick: 7,
     tolCuddle: 4,
+    tolBark: 5,
     avatar: 'https://dge9rmgqjs8m1.cloudfront.net/global/6e784a56292505372595b9023b9cdc970010/original.6e784a56292505372595b9023b9cdc970010.gif'
 });
 
 var emily = new Adopter("emily",{
     tolLick: 4,
     tolCuddle: 6,
+    tolBark: 3,
     avatar: 'https://asset1.basecamp.com/1940253/people/8112581/photo/avatar.96.gif'
 })
 
@@ -194,7 +196,7 @@ $('#lick').click(function() {
            }
            else {
                alert('That\'s enough licks for now!');
-               $("#lick").css('opacity',.25);
+               $("#lick").css('opacity',.15);
            }
         }
    });
@@ -207,7 +209,7 @@ $('#cuddle').click(function() {
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
-           if (wa[index][2].totalCuddles <= maxCuddles) {
+           if (wa[index][2].totalCuddles < maxCuddles) {
                wa[index][2].totalCuddles++;
                console.log(wa[index][2].wooScore);
                wa[index][2].wooScore += 10;
@@ -219,7 +221,7 @@ $('#cuddle').click(function() {
             }
             else {
                 alert('That\'s enough cuddles for now!');
-                $("#cuddle").css('opacity',.25);
+                $("#cuddle").css('opacity',.15);
             }
         }
    });
@@ -228,27 +230,30 @@ $('#cuddle').click(function() {
 $('#bark').click(function() {
     dogPos = $.inArray(dogname,dogNames);
     adopterPos = $.inArray(adoptername,adopterNames);
+    var maxBarks = Adopters[adopterPos].tolBark;
    $.each(wa, function(index,e)  {
         //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
-           console.log(wa[index][2].wooScore);
-           wa[index][2].wooScore -= 4;
-           moveProgress(-4);
-           $(".percent").html(wa[index][2].wooScore);
-           if (wa[index][2] >= 100) {
+           if (wa[index][2].totalBarks < maxBarks) {
+               wa[index][2].totalBarks++;
                console.log(wa[index][2].wooScore);
-               if (wa[index][2] > 100) {
-                   wa[index][2] = 100;
-                   console.log(wa[index][2]);
-                   $(".percent").html(wa[index][2]);
-                 }
-               Window.setTimeout(win(wa[index]),1500);
-           }
-           if (wa[index][2] < 0) {
-               wa[index][2] = 0;
-               $(".percent").html(wa[index][2]);
-               lose(wa[index]);
-           }
+               wa[index][2].wooScore -= 4;
+               moveProgress(-4);
+               $(".percent").html(wa[index][2].wooScore);
+               if (wa[index][2].wooScore < 0) {
+                   wa[index][2].wooScore = 0;
+                   $(".percent").html(0);
+                   alert('Maybe you should try something else!');
+               }
+            }
+            else {
+                alert('Ok, ok, enough with the barking!');
+                $("#bark").css('opacity',.25);
+                wa[index][2].totalCuddles = 0;
+                wa[index][2].totalLicks = 0;
+                $("#cuddle").css('opacity',1);
+                $("#lick").css('opacity',1);
+            }
         }
    });
 });
