@@ -154,8 +154,8 @@ $('.dog-selection-entry').click(function() {
     var dogView = $('#sidebar-template').html();
     $('#sidebar').append(_.template(dogView,({"imgURL": Dogs[dogPos].avatar, "dogname":dogname})));
     // var dogid = eval(($(this).attr('id')));
-    $('#select-player').hide(750);
-    $('#select-adopter').show(750);
+    $('#select-player').fadeOut(1150);
+    $('#select-adopter').fadeIn(1150);
     // var dogid = eval($(event.target).html());
     // var dogid = eval(dogname);
   }
@@ -164,7 +164,7 @@ $('.dog-selection-entry').click(function() {
 
 $('.adopter-selection-entry').click(function() {
     adoptername = $(this).children("button").html();
-    $('#select-adopter').hide(750);
+    $('#select-adopter').fadeOut(1150);
     $('')
     // eval('$(\'#' + dogselectionid + '\')'  ).show();
     $('#main-game').css('opacity',1);
@@ -263,7 +263,7 @@ $('#bark').click(function() {
 
 $('.close').click(function(event) {
     event.preventDefault();
-    $("#alert").hide(500);
+    $("#alert").fadeOut(700);
     if (won) {
         resetGame();
     }
@@ -288,7 +288,7 @@ function resetGame(){
    $(".main-game").css('opacity',.25);
    wooData = [0];
    wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
-   $('#select-player').show(750);
+   $('#select-player').fadeIn(1150);
 }
 
 function wooAlert(alertMsg) {
