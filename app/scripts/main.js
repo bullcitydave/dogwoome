@@ -196,6 +196,8 @@ $('#lick').click(function() {
            }
            else {
                alert('That\'s enough licks for now!');
+               $('#alert').show(750);
+               $(".alert-message").html('That\'s enough licks for now!');
                $("#lick").css('opacity',.15);
            }
         }

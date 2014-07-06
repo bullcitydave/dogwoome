@@ -1,5 +1,6 @@
 @import "../bower_components/bourbon/dist/bourbon";
 @import url(http://fonts.googleapis.com/css?family=Luckiest+Guy);
+@import url(http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed);
 
 * { @include box-sizing(border-box); }
 
@@ -8,7 +9,7 @@ $small-avatar      :  75px;
 $medium-avatar     :  150px;
 $large-avatar      :  250px;
 $primary-font      :  'Luckiest Guy', Tahoma, sans-serif;
-$secondary-font    :  Tahoma, sans-serif;
+$secondary-font    :  'Stint Ultra Condensed', 'Times New Roman', serif;
 
 body {
     background-color: #ddd;
@@ -91,6 +92,19 @@ section#select-player {
 section#select-adopter {
     @extend #select-player;
     display: none;
+}
+
+section#alert {
+    @extend #select-player;
+    display: none;
+    background-color: darkorange;
+    width: 450px;
+    height: 300px;
+    font-family: "Stint Ultra Condensed", "Times New Roman", serif;
+    padding: 50px;
+    text-align: center;
+    top: 200px;
+    left: 300px;
 }
 
 div.dog-selection-entry, div.adopter-selection-entry
