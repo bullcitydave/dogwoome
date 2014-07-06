@@ -10,6 +10,10 @@
 // e.g. var tinaFey = new Player();
 // e.g. var attackMode = function(target){ Some code that produces an attack - pew, pew! };
 
+var lickPts   =  5;
+var cuddlePts = 10;
+var barkPts   = -4;
+
 
 
 // ACTIONS
@@ -64,10 +68,7 @@ function WooScore (dogname, adoptername) {
 }
 
 
-// INITIALIZE GAME
-// onload
 
-$("#main-game").css('opacity',.25);
 
 
 
@@ -192,9 +193,9 @@ $('#lick').click(function() {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
            console.log(wa[index][2].wooScore);
            if (wa[index][2].totalLicks < maxLicks) {
-               wa[index][2].wooScore += 5;
+               wa[index][2].wooScore += lickPts;
                wa[index][2].totalLicks++;
-               moveProgress(5);
+               moveProgress(lickPts);
                $(".percent").html(wa[index][2].wooScore);
                if (wa[index][2].wooScore >= 100) {
                    win(wa[index]);
@@ -219,8 +220,8 @@ $('#cuddle').click(function() {
            if (wa[index][2].totalCuddles < maxCuddles) {
                wa[index][2].totalCuddles++;
                console.log(wa[index][2].wooScore);
-               wa[index][2].wooScore += 10;
-               moveProgress(10);
+               wa[index][2].wooScore += cuddlePts;
+               moveProgress(cuddlePts);
                $(".percent").html(wa[index][2].wooScore);
                if (wa[index][2].wooScore >= 100) {
                    win(wa[index]);
@@ -245,17 +246,20 @@ $('#bark').click(function() {
            if (wa[index][2].totalBarks < maxBarks) {
                wa[index][2].totalBarks++;
                console.log(wa[index][2].wooScore);
-               wa[index][2].wooScore -= 4;
-               moveProgress(-4);
+               wa[index][2].wooScore += barkPts;
+               moveProgress(barkPts);
                $(".percent").html(wa[index][2].wooScore);
                if (wa[index][2].wooScore < 0) {
                    wa[index][2].wooScore = 0;
                    $(".percent").html(0);
                    wooAlert('Maybe you should try something else!');
                }
+               if (wa[index][2].totalBarks === 2 ) {
+                   wooAlert('Don\'t give up!');
+               }
             }
             else {
-                wooAlert('Ok, ok, enough with the barking!');
+                wooAlert('OK, enough with the barking! Come over here!');
                 $("#bark").css('opacity',.15);
                 wa[index][2].totalCuddles = 0;
                 wa[index][2].totalLicks = 0;
@@ -290,10 +294,15 @@ function moveProgress(widthChange){
 function resetGame(){
    $(".woobarprog").css('width',0);
    $(".percent").html(0);
-   $(".main-game").css('opacity',.25);
-   wooData = [0];
-   wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
+   $("#sidebar").empty();
+   $("#main-game").css('opacity',.25);
+   $("#lick").css('opacity',1);
+   $("#cuddle").css('opacity',1);
+   $("#bark").css('opacity',1);
+   wooData = [{wooScore: 0, totalLicks: 0, totalCuddles: 0, totalBarks: 0}];
+   wa =  cartesianProductOf(dogNames,adopterNames, wooData);
    $('#select-player').fadeIn(750);
+   won = false;
 }
 
 function wooAlert(alertMsg) {
@@ -320,10 +329,7 @@ $(document).ready(function() {
 
 
 
-
-// Initialize
-
-// Cartesian Produt function from ** http://stackoverflow.com/questions/12303989/cartesian-product-of-multiple-arrays-in-javascript **
+// Cartesian Product function from ** http://stackoverflow.com/questions/12303989/cartesian-product-of-multiple-arrays-in-javascript **
 
 function cartesianProductOf(a,b) {
     return _.reduce(arguments, function(a, b) {
