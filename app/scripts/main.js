@@ -251,7 +251,7 @@ $('#bark').click(function() {
             }
             else {
                 wooAlert('Ok, ok, enough with the barking!');
-                $("#bark").css('opacity',.25);
+                $("#bark").css('opacity',.15);
                 wa[index][2].totalCuddles = 0;
                 wa[index][2].totalLicks = 0;
                 $("#cuddle").css('opacity',1);
@@ -270,6 +270,7 @@ $('.close').click(function(event) {
   });
 
 function win(dogAndAdopter){
+    $(".percent").html(100);
     wooAlert(dogAndAdopter[1] + ' wants to adopt ' + dogAndAdopter[0] + '!');
     won = true;
 }
@@ -307,7 +308,10 @@ function wooAlert(alertMsg) {
 // INITIALIZE GAME
 // onload
 
-$("#main-game").css('opacity',.25);
+$(document).ready(function() {
+  $("h1").lettering();
+  $("#main-game").css('opacity',.25);
+});
 
 
 

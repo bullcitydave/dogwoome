@@ -10,6 +10,7 @@ $medium-avatar     :  150px;
 $large-avatar      :  250px;
 $primary-font      :  'Luckiest Guy', Tahoma, sans-serif;
 $secondary-font    :  'Stint Ultra Condensed', 'Times New Roman', serif;
+$darkdarkred       :  '#380102';
 
 body {
     background-color: #ddd;
@@ -29,8 +30,16 @@ h1 {
     display: block;
     padding: 5x 0 0 0;
     text-align: center;
-    margin: 15px 0 0 0;
-}
+    margin: 25px 0 0 0;
+    span.char4, span.char5, span.char6 {
+      color: darkorange;
+      display: inline-block;
+      transform: skew(15deg, -45deg);
+    }
+    span.char9 {
+      color: $darkdarkred;
+    }
+  }
 
 h2 {
     font-family: $primary-font;
@@ -111,6 +120,7 @@ section#alert {
     text-align: center;
     top: 200px;
     left: 300px;
+    color: $darkdarkred;
     p.close {
         border-width: medium medium 3px 3px;
         border-style: solid;
@@ -202,6 +212,7 @@ p.progress-percentage {
     font-family: $primary-font;
     margin: 5px 10px 0 0;
     font-size: 1em;
+    color: $darkdarkred;
 }
 
 // holding the index of the dog in the Dogs array, to pass to template; not ideal, but works for now
