@@ -15,7 +15,7 @@
 
         <!-- additional libraries -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-        <script src="scripts/jquery.lettering.min.js"></script>
+
     </head>
     <body>
       <!--[if lt IE 10]>
@@ -63,8 +63,8 @@
 
             <section id="sidebar">
             <script type="text/template" id="sidebar-template">
-                <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="<%- imgURL %>"</a>
-                    <button class="dog-selection-button"><%- dogname %></button>
+                <div class="dog-display-entry"><img class="dog-avatar-large" src="<%- imgURL %>">
+                    <button class="dog-display-button"><%- dogname %></button>
                 </div>
             </script>
             </section>
@@ -97,6 +97,8 @@
         </section>
 
         <script src="scripts/vendor.js"></script>
+
+        <script src="scripts/jquery.lettering-0.6.1.min.js"></script>
 
         <script src="scripts/main.js"></script>
     </body>

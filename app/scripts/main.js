@@ -149,13 +149,14 @@ var adopterPos = 0;
 
 
 $('.dog-selection-entry').click(function() {
+    event.preventDefault();
     dogname = $(this).children(".dog-selection-button").html(); // need a better way but returning value isn't working
     dogPos = $(this).children(".index-ignore").html();
     var dogView = $('#sidebar-template').html();
     $('#sidebar').append(_.template(dogView,({"imgURL": Dogs[dogPos].avatar, "dogname":dogname})));
     // var dogid = eval(($(this).attr('id')));
-    $('#select-player').fadeOut(1150);
-    $('#select-adopter').fadeIn(1150);
+    $('#select-player').fadeOut(750);
+    $('#select-adopter').fadeIn(750);
     // var dogid = eval($(event.target).html());
     // var dogid = eval(dogname);
   }
@@ -163,8 +164,9 @@ $('.dog-selection-entry').click(function() {
 
 
 $('.adopter-selection-entry').click(function() {
+    event.preventDefault();
     adoptername = $(this).children("button").html();
-    $('#select-adopter').fadeOut(1150);
+    $('#select-adopter').fadeOut(750);
     $('')
     // eval('$(\'#' + dogselectionid + '\')'  ).show();
     $('#main-game').css('opacity',1);
@@ -181,6 +183,7 @@ $('.adopter-selection-entry').click(function() {
 
 
 $('#lick').click(function() {
+    event.preventDefault();
     dogPos = $.inArray(dogname,dogNames);
     adopterPos = $.inArray(adoptername,adopterNames);
     var maxLicks = Adopters[adopterPos].tolLick;
@@ -206,6 +209,7 @@ $('#lick').click(function() {
 });
 
 $('#cuddle').click(function() {
+    event.preventDefault();
     dogPos = $.inArray(dogname,dogNames);
     adopterPos = $.inArray(adoptername,adopterNames);
     var maxCuddles = Adopters[adopterPos].tolCuddle;
@@ -231,6 +235,7 @@ $('#cuddle').click(function() {
 });
 
 $('#bark').click(function() {
+    event.preventDefault();
     dogPos = $.inArray(dogname,dogNames);
     adopterPos = $.inArray(adoptername,adopterNames);
     var maxBarks = Adopters[adopterPos].tolBark;
@@ -288,7 +293,7 @@ function resetGame(){
    $(".main-game").css('opacity',.25);
    wooData = [0];
    wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
-   $('#select-player').fadeIn(1150);
+   $('#select-player').fadeIn(750);
 }
 
 function wooAlert(alertMsg) {
