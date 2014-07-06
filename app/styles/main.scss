@@ -1,5 +1,6 @@
 @import "../bower_components/bourbon/dist/bourbon";
 @import url(http://fonts.googleapis.com/css?family=Luckiest+Guy);
+@import url(http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed);
 
 * { @include box-sizing(border-box); }
 
@@ -8,7 +9,7 @@ $small-avatar      :  75px;
 $medium-avatar     :  150px;
 $large-avatar      :  250px;
 $primary-font      :  'Luckiest Guy', Tahoma, sans-serif;
-$secondary-font    :  Tahoma, sans-serif;
+$secondary-font    :  'Stint Ultra Condensed', 'Times New Roman', serif;
 
 body {
     background-color: #ddd;
@@ -39,7 +40,12 @@ h2 {
 p {
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
-  }
+}
+
+a {
+    text-decoration:none;
+    color:inherit;
+}
 
 ul, menu, dir {
     padding: 0;
@@ -92,6 +98,34 @@ section#select-adopter {
     @extend #select-player;
     display: none;
 }
+
+section#alert {
+    @extend #select-player;
+    display: none;
+    background-color: darkorange;
+    width: 450px;
+    height: 300px;
+    font-family: "Stint Ultra Condensed", "Times New Roman", serif;
+    font-size: 5em;
+    padding: 30px;
+    text-align: center;
+    top: 200px;
+    left: 300px;
+    p.close {
+        border-width: medium medium 3px 3px;
+        border-style: solid;
+        border-color: #000;
+        position: relative;
+        font-size: 0.75em;
+        background: none repeat scroll 0% 0% #8B0000;
+        color: darkorange;
+        width: 100px;
+        margin: 10px auto;
+        text-align: center;
+    }
+    p.win {}  // empty class...forces gameReset()...is there a better way?
+  }
+
 
 div.dog-selection-entry, div.adopter-selection-entry
 {
