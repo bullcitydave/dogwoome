@@ -15,6 +15,7 @@ $darkdarkred       :  '#380102';
 body {
     background-color: #ddd;
     max-width: 800px;
+    margin: 0;
 }
 
 header {
@@ -161,6 +162,7 @@ div.dog-selection-entry, div.adopter-selection-entry
 div.dog-display-entry
 {
     @extend .dog-selection-entry;
+    margin: 0 37.5px 20px 10px;
 }
 
 img.dog-avatar-large, img.adopter-avatar-large
@@ -241,7 +243,7 @@ h1#woof {
     color: darkorange;
     position: absolute;
     top: 180px;
-    left: 75px;
+    left: 46px;
     font-size: 3em;
     z-index:500;
     span.char1, span.char2, span.char3 {
