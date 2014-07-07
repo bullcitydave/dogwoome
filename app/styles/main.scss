@@ -182,6 +182,7 @@ section#main-game {
     // transition: opacity 0.5s ease;
     margin: 30px 0 0 0;
 }
+
 section#sidebar {
     float:left;
     width:250px;
@@ -235,6 +236,21 @@ p.progress-percentage {
     font-size: 1em;
     color: $darkdarkred;
 }
+
+h1#woof {
+    color: darkorange;
+    position: absolute;
+    top: 180px;
+    left: 75px;
+    font-size: 3em;
+    z-index:500;
+    span.char1, span.char2, span.char3 {
+        display: inline-block;
+        transform: skew(15deg, -45deg);
+        }
+    display:none;
+  }
+
 
 // holding the index of the dog in the Dogs array, to pass to template; not ideal, but works for now
 span.index-ignore {
