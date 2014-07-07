@@ -172,19 +172,22 @@ $(document).ready(function() {
         $('#select-adopter').fadeIn(750);
       }
     );
+
+    $('.adopter-selection-entry').click(function() {
+        event.preventDefault();
+        adoptername = $(this).children("button").html();
+        $('#select-adopter').fadeOut(750);
+        $('') ///what happened here???
+        $('#main-game').css('opacity',1);
+        $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
+    });
+
 });
 
 
 
 
-$('.adopter-selection-entry').click(function() {
-    event.preventDefault();
-    adoptername = $(this).children("button").html();
-    $('#select-adopter').fadeOut(750);
-    $('') ///what happened here???
-    $('#main-game').css('opacity',1);
-    $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
-});
+
 
 $('#lick').click(function() {
     event.preventDefault();
@@ -251,12 +254,12 @@ $('#bark').click(function() {
                    $(".percent").html(0);
                    wooAlert('Maybe you should try something else!');
                }
-               if (wa[index][2].totalBarks === 2 && maxBarks > 2 ) {
+               if (wa[index][2].totalBarks === 3 && maxBarks > 3 ) {
                    wooAlert('Don\'t give up!');
                }
             }
             else {
-                wooAlert('OK, enough with the barking! Come over here!');
+                wooAlert('OK, OK, come back over here!');
                 $("#bark").css('opacity',.15);
                 wa[index][2].totalCuddles = 0;
                 wa[index][2].totalLicks = 0;
