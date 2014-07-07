@@ -10,6 +10,7 @@ $medium-avatar     :  150px;
 $large-avatar      :  250px;
 $primary-font      :  'Luckiest Guy', Tahoma, sans-serif;
 $secondary-font    :  'Stint Ultra Condensed', 'Times New Roman', serif;
+$darkdarkred       :  '#380102';
 
 body {
     background-color: #ddd;
@@ -29,12 +30,25 @@ h1 {
     display: block;
     padding: 5x 0 0 0;
     text-align: center;
-    margin: 15px 0 0 0;
-}
+    margin: 25px 0 0 0;
+    span.char4, span.char5, span.char6 {
+      color: darkorange;
+      display: inline-block;
+      transform: skew(15deg, -45deg);
+    }
+    span.char9 {
+      color: #c8bcbc;
+    }
+  }
 
 h2 {
     font-family: $primary-font;
-    letter-spacing: .15em;
+    letter-spacing: .18em;
+    font-size: 1.3em;
+    -webkit-margin-before: 0.0;
+    -webkit-margin-after: 0.0;
+    padding: 10px 2px 10px 2px;
+    text-align: center;
 }
 
 p {
@@ -71,13 +85,22 @@ header.modal-header {
     margin: 0 37.5px 0px 37.5px;
 }
 
+.dog-display-button {
+    @extend .dog-selection-button;
+    font-family: 'Luckiest Guy';
+    font-size: 30px;
+    margin: 0 12.5px 0 12.5px;
+    width: 200px;
+}
+
 .dog-action {
     @extend .menu-button;
-    margin: 20px 25px 0 25px;
-    clear: both;
-    width: 200px;
-    float:left;
-}
+    margin: 65px 15px 0 0;
+    padding: 0;
+    width: 25%;
+    float: left;
+  }
+
 
 section#select-player {
     background-color: #f0f0f0;
@@ -106,11 +129,12 @@ section#alert {
     width: 450px;
     height: 300px;
     font-family: "Stint Ultra Condensed", "Times New Roman", serif;
-    font-size: 5em;
+    font-size: 4em;
     padding: 30px;
     text-align: center;
     top: 200px;
-    left: 300px;
+    left: 335px;
+    color: $darkdarkred;
     p.close {
         border-width: medium medium 3px 3px;
         border-style: solid;
@@ -129,8 +153,13 @@ section#alert {
 
 div.dog-selection-entry, div.adopter-selection-entry
 {
-  width:250px;
+  width:225px;
   margin:auto;
+}
+
+div.dog-display-entry
+{
+    @extend .dog-selection-entry;
 }
 
 img.dog-avatar-large, img.adopter-avatar-large
@@ -154,6 +183,7 @@ section#main-game {
 }
 section#sidebar {
     float:left;
+    width:250px;
 }
 
 section#woo-battle {
@@ -202,6 +232,7 @@ p.progress-percentage {
     font-family: $primary-font;
     margin: 5px 10px 0 0;
     font-size: 1em;
+    color: $darkdarkred;
 }
 
 // holding the index of the dog in the Dogs array, to pass to template; not ideal, but works for now

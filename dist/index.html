@@ -2,7 +2,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>codename: dogwoome</title>
+        <title>dogwoome!</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -15,6 +15,7 @@
 
         <!-- additional libraries -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+
     </head>
     <body>
       <!--[if lt IE 10]>
@@ -22,7 +23,7 @@
       <![endif]-->
 
         <header id="container">
-            <h1>dogwoome!</h1>
+            <h1><p id="askew">dogwoome!</p></h1>
         </header>
 
         <section id="select-player">
@@ -61,12 +62,13 @@
             </section> -->
 
             <section id="sidebar">
+
+            </section>
             <script type="text/template" id="sidebar-template">
-                <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="<%- imgURL %>"</a>
-                    <button class="dog-selection-button"><%- dogname %></button>
+                <div class="dog-display-entry"><img class="dog-avatar-large" src="<%- imgURL %>">
+                    <button class="dog-display-button"><%- dogname %></button>
                 </div>
             </script>
-            </section>
 
             <section id="woo-battle">
               <div class="adopter-avatar">
@@ -96,6 +98,8 @@
         </section>
 
         <script src="scripts/vendor.js"></script>
+
+        <script src="scripts/jquery.lettering-0.6.1.min.js"></script>
 
         <script src="scripts/main.js"></script>
     </body>
