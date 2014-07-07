@@ -1,99 +1,73 @@
-// CONSTRUCTORS
-// Here is where you'll create your constructors for you player and monster.
-// e.g. function Monster(){};
-// e.g. function Player(){};
+'use strict';
 
-
-// GLOBAL VARIABLES
-// You'll also want to create variables for the specific players and monsters.
-// e.g. var purplePeopleEater = new Monster();
-// e.g. var tinaFey = new Player();
-// e.g. var attackMode = function(target){ Some code that produces an attack - pew, pew! };
-
-var lickPts   =  5;
-var cuddlePts = 10;
-var barkPts   = -4;
-
-
-
-// ACTIONS
-// This is where jQuery will come into play and where you'll set a lot of your
-// interactions for players and monsters. (e.g. player selection, attack interactions)
-// e.g. $('.purple-people-eater').click(function () { Some code that attacks the monster! };
-
-
-// CONSTRUCTORS
-
-"use strict";
+//// CONSTRUCTORS
 
 function Dog (name, options) {
    options = options || {};
    this.name = name;
-   this.color = options.color;
-   this.age = options.age;
-   this.breeds = options.breeds || 'mutt';
-   this.colors = options.colors;
-   this.weight = options.weight;
-   this.barkVol = options.barkVol || 5;
+   this.color = options.color;  // not used
+   this.age = options.age;  // not used
+   this.breeds = options.breeds || 'mutt';  // not used
+   this.weight = options.weight;  // not used
+   this.barkVol = options.barkVol || 5;  // not used
    this.avatar = options.avatar;
    this.lick = function(adopter) {
        return adopter.licked = true;
-   }
+   }  // not used
    this.cuddle = function(adopter) {
        return adopter.cuddled = true;
-   };
+   };  // not used
    this.bark = function(adopter) {
        return adopter.barkedAt = true;
-   }
+   }  // not used
 }
 
 function Adopter (name, options) {
    options = options || {};
    this.name = name;
-   this.licked = false;
-   this.cuddled = false;
+   this.licked = false;  // not used
+   this.cuddled = false;  // not used
    this.tolLick = options.tolLick || 5;
    this.tolCuddle = options.tolCuddle || 5;
    this.tolBark = options.tolBark || 5;
-   this.prefAge = options.prefAge;
+   this.prefAge = options.prefAge;  // not used
    this.avatar = options.avatar;
 }
 
-// not sure if I will use this
-function WooScore (dogname, adoptername) {
-   this.dogname = dogname;
-   this.adoptername = adoptername;
-   this.score = 0;
-   this.licks = 0;
-}
 
 
-
-
-
+//// GLOBAL VARIABLES
 
 // DOGS
 
 var Moksha = new Dog("Moksha",{
-  color: ["brown","white"],
-  age: 4,
-  avatar: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/t31.0-8/1932629_10152418870378352_6293108892780372302_o.jpg'
-});
-
-var Bella = new Dog("Bella",{
-  color: ["black"],
-  age: 9
+    color: ["brown","white"],
+    age: 4,
+    avatar: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/t31.0-8/1932629_10152418870378352_6293108892780372302_o.jpg'
 });
 
 var Emmitt = new Dog("Emmitt",{
-  color: ["yellow"],
-  age: 5,
-  avatar: 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xap1/t1.0-9/60479_432375844549_1903986_n.jpg'
+    color: ["yellow"],
+    age: 5,
+    avatar: 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xap1/t1.0-9/60479_432375844549_1903986_n.jpg'
+});
+
+var Bella = new Dog("Bella",{
+    color: ["black"],
+    age: 2,
+    avatar: 'https://scontent-b-lga.xx.fbcdn.net/hphotos-xfp1/t1.0-9/4541_89487809549_852660_n.jpg'
 });
 
 var Herman = new Dog("Herman",{
-  color: ["black","white"],
-  age: 6
+    color: ["black","white"],
+    age: 6,
+    avatar: 'http://i.imgur.com/s7mpWGj.jpg'
+});
+
+var Dogs = ([Moksha,Emmitt,Bella,Herman]);
+
+var dogNames = Dogs.map(function (dog) {
+    return dog.name;
 });
 
 // ADOPTERS
@@ -114,74 +88,75 @@ var Emily = new Adopter("Emily",{
 
 var Julia = new Adopter("Julia",{
     tolLick: 10,
+    tolCuddle: 3,
+    tolBark: 7,
+    avatar: 'https://avatars0.githubusercontent.com/u/955558?s=460'
 })
 
-var Justin = new Adopter("Justin",{
-    tolLick: 2
+var Talal = new Adopter("Justin",{
+    avatar: 'https://avatars1.githubusercontent.com/u/3066028?s=400'
 })
 
-var Adopters = ([Dave,Emily]);
+var Adopters = ([Dave,Emily,Julia,Talal]);
 
 var adopterNames = Adopters.map(function (adopter) {
     return adopter.name;
 });
 
-var Dogs = ([Moksha,Emmitt,Bella,Herman]); // populate these automatically based on dogs defined
 
-var dogNames = Dogs.map(function (dog) {
-    return dog.name;
-});
+// DEFAULT POINT VALUES FOR ACTIONS
 
-var wooScores = [0];
+var lickPts   =  5;
+var cuddlePts = 10;
+var barkPts   = -4;
+
+
+// INITIALIZED STATE OF WOO DATA
 
 var wooData = [{wooScore: 0, totalLicks: 0, totalCuddles: 0, totalBarks: 0}];
 
 
-// var wa =  cartesianProductOf(dogNames,adopterNames, wooScores);
-var wa =  cartesianProductOf(dogNames,adopterNames, wooData);
+// DATA STRUCTURE
+// wa = Woo Array
+// created for use in multi-player/dog game with multiple active potential adopters
+
+var wa =  cartesianProductOf(dogNames, adopterNames, wooData);
+
+
+// MISCELLANEOUS
 
 var won = false;
 
 var dogname = '';
-var dogPos = 0;
+var dogPos = 0;   // position of the dog in the the Woo Array
+
 var adoptername = '';
-var adopterPos = 0;
+var adopterPos = 0;    // position of the adopter in the Woo Array
 
 
+
+
+//// ACTIONS
 
 $('.dog-selection-entry').click(function() {
     event.preventDefault();
-    dogname = $(this).children(".dog-selection-button").html(); // need a better way but returning value isn't working
+    dogname = $(this).children(".dog-selection-button").html();
     dogPos = $(this).children(".index-ignore").html();
     var dogView = $('#sidebar-template').html();
     $('#sidebar').append(_.template(dogView,({"imgURL": Dogs[dogPos].avatar, "dogname":dogname})));
-    // var dogid = eval(($(this).attr('id')));
     $('#select-player').fadeOut(750);
     $('#select-adopter').fadeIn(750);
-    // var dogid = eval($(event.target).html());
-    // var dogid = eval(dogname);
   }
 );
-
 
 $('.adopter-selection-entry').click(function() {
     event.preventDefault();
     adoptername = $(this).children("button").html();
     $('#select-adopter').fadeOut(750);
     $('')
-    // eval('$(\'#' + dogselectionid + '\')'  ).show();
     $('#main-game').css('opacity',1);
     $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
 });
-
-// for (var i = 0, len = Adopters.length; i < len; i++) {
-//     if (Adopters[i].name === "emily") {
-//         // match is in array[i]
-//         console.log(i);
-//     }
-// }
-
-
 
 $('#lick').click(function() {
     event.preventDefault();
@@ -189,9 +164,7 @@ $('#lick').click(function() {
     adopterPos = $.inArray(adoptername,adopterNames);
     var maxLicks = Adopters[adopterPos].tolLick;
    $.each(wa, function(index,e)  {
-        //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
-           console.log(wa[index][2].wooScore);
            if (wa[index][2].totalLicks < maxLicks) {
                wa[index][2].wooScore += lickPts;
                wa[index][2].totalLicks++;
@@ -215,11 +188,9 @@ $('#cuddle').click(function() {
     adopterPos = $.inArray(adoptername,adopterNames);
     var maxCuddles = Adopters[adopterPos].tolCuddle;
    $.each(wa, function(index,e)  {
-        //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
            if (wa[index][2].totalCuddles < maxCuddles) {
                wa[index][2].totalCuddles++;
-               console.log(wa[index][2].wooScore);
                wa[index][2].wooScore += cuddlePts;
                moveProgress(cuddlePts);
                $(".percent").html(wa[index][2].wooScore);
@@ -241,11 +212,9 @@ $('#bark').click(function() {
     adopterPos = $.inArray(adoptername,adopterNames);
     var maxBarks = Adopters[adopterPos].tolBark;
    $.each(wa, function(index,e)  {
-        //  if ((jQuery.inArray(dogname,e)) && (jQuery.inArray(adoptername,e))) {
        if ((e[0] === dogname) && (e[1] === adoptername)) {
            if (wa[index][2].totalBarks < maxBarks) {
                wa[index][2].totalBarks++;
-               console.log(wa[index][2].wooScore);
                wa[index][2].wooScore += barkPts;
                moveProgress(barkPts);
                $(".percent").html(wa[index][2].wooScore);
@@ -254,7 +223,7 @@ $('#bark').click(function() {
                    $(".percent").html(0);
                    wooAlert('Maybe you should try something else!');
                }
-               if (wa[index][2].totalBarks === 2 ) {
+               if (wa[index][2].totalBarks === 2 && maxBarks > 2 ) {
                    wooAlert('Don\'t give up!');
                }
             }
@@ -310,17 +279,9 @@ function wooAlert(alertMsg) {
     $('.alert-msg').html(alertMsg);
     };
 
-// var finddog = $.grep(Dogs, function(e){ return e.name == dogname; });
-//
-// var dogposition = jQuery.inArray(finddog,Dogs);
-// var dogposition2 = jQuery.inArray(Dogs[0],Dogs);
-//
-// (Dogs[0] === finddog);
-
 
 
 // INITIALIZE GAME
-// onload
 
 $(document).ready(function() {
   $("h1").lettering();
