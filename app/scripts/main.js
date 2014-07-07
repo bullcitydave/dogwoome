@@ -101,7 +101,7 @@ var Julia = new Adopter("Julia",{
     avatar: 'https://avatars0.githubusercontent.com/u/955558?s=460'
 })
 
-var Talal = new Adopter("Justin",{
+var Talal = new Adopter("Talal",{
     avatar: 'https://avatars1.githubusercontent.com/u/3066028?s=400'
 })
 
@@ -160,6 +160,7 @@ $(document).ready(function() {
     $("h1").lettering();
     $("#main-game").css('opacity',.25);
     populateDogChoices(Dogs);
+    populateAdopterChoices(Adopters);
 
     $('.dog-selection-entry').click(function() {
         event.preventDefault();
@@ -180,7 +181,7 @@ $('.adopter-selection-entry').click(function() {
     event.preventDefault();
     adoptername = $(this).children("button").html();
     $('#select-adopter').fadeOut(750);
-    $('')
+    $('') ///what happened here???
     $('#main-game').css('opacity',1);
     $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
 });
