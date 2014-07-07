@@ -70,6 +70,14 @@ var dogNames = Dogs.map(function (dog) {
     return dog.name;
 });
 
+function populateDogChoices(doglist){
+    var dogSelectView = $('#dog-select-template').html();
+    for (var i = 0; i < (_.size(doglist)); i++)
+        {
+            $('.dog-choices').append(_.template(dogSelectView,({"imgURL": doglist[i].avatar, "dogname": doglist[i].name, "dogindex":i})));
+        }
+}
+
 // ADOPTERS
 
 var Dave = new Adopter("Dave",{
@@ -93,7 +101,7 @@ var Julia = new Adopter("Julia",{
     avatar: 'https://avatars0.githubusercontent.com/u/955558?s=460'
 })
 
-var Talal = new Adopter("Justin",{
+var Talal = new Adopter("Talal",{
     avatar: 'https://avatars1.githubusercontent.com/u/3066028?s=400'
 })
 
@@ -102,6 +110,14 @@ var Adopters = ([Dave,Emily,Julia,Talal]);
 var adopterNames = Adopters.map(function (adopter) {
     return adopter.name;
 });
+
+function populateAdopterChoices(adopterlist){
+    var adopterSelectView = $('#adopter-select-template').html();
+    for (var i = 0; i < (_.size(adopterlist)); i++)
+        {
+            $('.adopter-choices').append(_.template(adopterSelectView,({"imgURL": adopterlist[i].avatar, "adoptername": adopterlist[i].name})));
+        }
+}
 
 
 // DEFAULT POINT VALUES FOR ACTIONS
@@ -138,25 +154,40 @@ var adopterPos = 0;    // position of the adopter in the Woo Array
 
 //// ACTIONS
 
-$('.dog-selection-entry').click(function() {
-    event.preventDefault();
-    dogname = $(this).children(".dog-selection-button").html();
-    dogPos = $(this).children(".index-ignore").html();
-    var dogView = $('#sidebar-template').html();
-    $('#sidebar').append(_.template(dogView,({"imgURL": Dogs[dogPos].avatar, "dogname":dogname})));
-    $('#select-player').fadeOut(750);
-    $('#select-adopter').fadeIn(750);
-  }
-);
+// INITIALIZE GAME
 
-$('.adopter-selection-entry').click(function() {
-    event.preventDefault();
-    adoptername = $(this).children("button").html();
-    $('#select-adopter').fadeOut(750);
-    $('')
-    $('#main-game').css('opacity',1);
-    $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
+$(document).ready(function() {
+    $("h1").lettering();
+    $("#main-game").css('opacity',.25);
+    populateDogChoices(Dogs);
+    populateAdopterChoices(Adopters);
+
+    $('.dog-selection-entry').click(function() {
+        event.preventDefault();
+        dogname = $(this).children(".dog-selection-button").html();
+        dogPos = $(this).children(".index-ignore").html();
+        var dogView = $('#sidebar-template').html();
+        $('#sidebar').append(_.template(dogView,({"imgURL": Dogs[dogPos].avatar, "dogname":dogname})));
+        $('#select-player').fadeOut(750);
+        $('#select-adopter').fadeIn(750);
+      }
+    );
+
+    $('.adopter-selection-entry').click(function() {
+        event.preventDefault();
+        adoptername = $(this).children("button").html();
+        $('#select-adopter').fadeOut(750);
+        $('') ///what happened here???
+        $('#main-game').css('opacity',1);
+        $('.adopter-avatar img').attr('src', eval(adoptername).avatar); // need better way to do this
+    });
+
 });
+
+
+
+
+
 
 $('#lick').click(function() {
     event.preventDefault();
@@ -223,12 +254,12 @@ $('#bark').click(function() {
                    $(".percent").html(0);
                    wooAlert('Maybe you should try something else!');
                }
-               if (wa[index][2].totalBarks === 2 && maxBarks > 2 ) {
+               if (wa[index][2].totalBarks === 3 && maxBarks > 3 ) {
                    wooAlert('Don\'t give up!');
                }
             }
             else {
-                wooAlert('OK, enough with the barking! Come over here!');
+                wooAlert('OK, OK, come back over here!');
                 $("#bark").css('opacity',.15);
                 wa[index][2].totalCuddles = 0;
                 wa[index][2].totalLicks = 0;
@@ -279,14 +310,6 @@ function wooAlert(alertMsg) {
     $('.alert-msg').html(alertMsg);
     };
 
-
-
-// INITIALIZE GAME
-
-$(document).ready(function() {
-  $("h1").lettering();
-  $("#main-game").css('opacity',.25);
-});
 
 
 
