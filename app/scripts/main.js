@@ -185,10 +185,6 @@ $(document).ready(function() {
 });
 
 
-
-
-
-
 $('#lick').click(function() {
     event.preventDefault();
     dogPos = $.inArray(dogname,dogNames);
@@ -256,7 +252,7 @@ $('#bark').click(function() {
                    wooAlert('Maybe you should try something else!');
                }
                if (wa[index][2].totalBarks === 3 && maxBarks > 3 ) {
-                   jQuery.delay(2000).wooAlert('Don\'t give up!');
+                   wooAlert('Don\'t give up!');
                }
             }
             else {
