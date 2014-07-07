@@ -239,6 +239,7 @@ $('#cuddle').click(function() {
 
 $('#bark').click(function() {
     event.preventDefault();
+    woof();
     dogPos = $.inArray(dogname,dogNames);
     adopterPos = $.inArray(adoptername,adopterNames);
     var maxBarks = Adopters[adopterPos].tolBark;
@@ -255,7 +256,7 @@ $('#bark').click(function() {
                    wooAlert('Maybe you should try something else!');
                }
                if (wa[index][2].totalBarks === 3 && maxBarks > 3 ) {
-                   wooAlert('Don\'t give up!');
+                   jQuery.delay(2000).wooAlert('Don\'t give up!');
                }
             }
             else {
@@ -309,6 +310,11 @@ function wooAlert(alertMsg) {
     $('#alert').fadeIn(750);
     $('.alert-msg').html(alertMsg);
     };
+
+function woof() {
+    $('#woof').fadeIn(700);
+    $('#woof').fadeOut(2300);
+}
 
 
 
