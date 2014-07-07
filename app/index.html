@@ -39,13 +39,12 @@
                 <h2>Choose a dog</h2>
             </header>
             <div class="dog-choices">
-                <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/t31.0-8/1932629_10152418870378352_6293108892780372302_o.jpg"></a>
-                    <button class="dog-selection-button">Moksha</button><span class="index-ignore">0</span>
-                </div>
-                <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xap1/t1.0-9/60479_432375844549_1903986_n.jpg"></a>
-                    <button class="dog-selection-button">Emmitt</button><span class="index-ignore">1</span>
-                </div>
             </div>
+            <script type="template/text" id="dog-select-template">
+            <div class="dog-selection-entry"><a href="#"><img class="dog-avatar-large" src="<%- imgURL %>"></a>
+                <button class="dog-selection-button"><%- dogname %></button><span class="index-ignore"><%- dogindex %></span>
+            </div>
+            </script>
         </section>
 
         <section id="select-adopter">

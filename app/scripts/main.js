@@ -70,6 +70,14 @@ var dogNames = Dogs.map(function (dog) {
     return dog.name;
 });
 
+function populateDogChoices(doglist){
+    var dogSelectView = $('#dog-select-template').html();
+    for (var i = 0; i < (_.size(doglist)); i++)
+        {
+            $('.dog-choices').append(_.template(dogSelectView,({"imgURL": doglist[i].avatar, "dogname": doglist[i].name, "dogindex":i})));
+        }
+}
+
 // ADOPTERS
 
 var Dave = new Adopter("Dave",{
@@ -102,6 +110,14 @@ var Adopters = ([Dave,Emily,Julia,Talal]);
 var adopterNames = Adopters.map(function (adopter) {
     return adopter.name;
 });
+
+function populateAdopterChoices(adopterlist){
+    var adopterSelectView = $('#adopter-select-template').html();
+    for (var i = 0; i < (_.size(adopterlist)); i++)
+        {
+            $('.adopter-choices').append(_.template(adopterSelectView,({"imgURL": adopterlist[i].avatar, "adoptername": adopterlist[i].name})));
+        }
+}
 
 
 // DEFAULT POINT VALUES FOR ACTIONS
@@ -138,16 +154,27 @@ var adopterPos = 0;    // position of the adopter in the Woo Array
 
 //// ACTIONS
 
-$('.dog-selection-entry').click(function() {
-    event.preventDefault();
-    dogname = $(this).children(".dog-selection-button").html();
-    dogPos = $(this).children(".index-ignore").html();
-    var dogView = $('#sidebar-template').html();
-    $('#sidebar').append(_.template(dogView,({"imgURL": Dogs[dogPos].avatar, "dogname":dogname})));
-    $('#select-player').fadeOut(750);
-    $('#select-adopter').fadeIn(750);
-  }
-);
+// INITIALIZE GAME
+
+$(document).ready(function() {
+    $("h1").lettering();
+    $("#main-game").css('opacity',.25);
+    populateDogChoices(Dogs);
+
+    $('.dog-selection-entry').click(function() {
+        event.preventDefault();
+        dogname = $(this).children(".dog-selection-button").html();
+        dogPos = $(this).children(".index-ignore").html();
+        var dogView = $('#sidebar-template').html();
+        $('#sidebar').append(_.template(dogView,({"imgURL": Dogs[dogPos].avatar, "dogname":dogname})));
+        $('#select-player').fadeOut(750);
+        $('#select-adopter').fadeIn(750);
+      }
+    );
+});
+
+
+
 
 $('.adopter-selection-entry').click(function() {
     event.preventDefault();
@@ -279,14 +306,6 @@ function wooAlert(alertMsg) {
     $('.alert-msg').html(alertMsg);
     };
 
-
-
-// INITIALIZE GAME
-
-$(document).ready(function() {
-  $("h1").lettering();
-  $("#main-game").css('opacity',.25);
-});
 
 
 
