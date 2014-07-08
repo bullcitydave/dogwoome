@@ -292,7 +292,7 @@ function moveProgress(widthChange){
    var totalBarWidth = parseInt($(".woobar").css('width'));
    var progWidth = parseInt($(".woobarprog").css('width'));
    var newWidth = (progWidth + (totalBarWidth*(widthChange/100))) + 'px';
-   woodbarprog.css('width', newWidth);
+   woobarprog.css('width', newWidth);
 }
 
 function resetGame(){
@@ -301,7 +301,7 @@ function resetGame(){
    resetDisplay();
 }
 
-function resetStyles();
+function resetStyles() {
    game.css('opacity',.25);
    lick.css('opacity',1);
    cuddle.css('opacity',1);
@@ -311,7 +311,7 @@ function resetStyles();
 }
 
 function resetData(){
-   wooData = [{wooScore: 0, totalLicks: 0, totalCuddles: 0, totalBarks: 0}];
+   Data = [{wooScore: 0, totalLicks: 0, totalCuddles: 0, totalBarks: 0}];
    wa =  cartesianProductOf(dogNames,adopterNames, wooData);
    won = false;
 }
