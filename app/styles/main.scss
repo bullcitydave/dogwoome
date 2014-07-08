@@ -167,22 +167,22 @@ div.dog-display-entry
 
 img.dog-avatar-large, img.adopter-avatar-large
 {
-	width:225px;
-   height:225px;
-   border-radius:75px;
+    width:225px;
+    height:225px;
+    border-radius:75px;
 }
 
 p.dog-selection-name, p.adopter-selecton-name
 {
-  @extend h2;
-  text-align:center;
-  clear:left;
+    @extend h2;
+    text-align:center;
+    clear:left;
 }
 
 
 section#main-game {
-    // transition: opacity 0.5s ease;
     margin: 30px 0 0 0;
+    opacity: 0.25;
 }
 
 section#sidebar {
@@ -252,9 +252,3 @@ h1#woof {
         }
     display:none;
   }
-
-
-// holding the index of the dog in the Dogs array, to pass to template; not ideal, but works for now
-span.index-ignore {
-  display:none;
-}
