@@ -135,6 +135,9 @@ var selectadopter = $('#select-adopter');
 var lick          = $('#lick');
 var cuddle        = $('#cuddle');
 var bark          = $('#bark');
+var percent       = $(".percent")
+var woobarprog    = $(".woobarprog")
+
 
 // TEMPLATES
 
@@ -204,7 +207,7 @@ lick.click(function() {
                e[2].wooScore += lickPts;
                e[2].totalLicks++;
                moveProgress(lickPts);
-               $(".percent").html(e[2].wooScore);
+               percent.html(e[2].wooScore);
                if (e[2].wooScore >= 100) {
                    win(e);
                }
@@ -226,7 +229,7 @@ cuddle.click(function() {
                e[2].totalCuddles++;
                e[2].wooScore += cuddlePts;
                moveProgress(cuddlePts);
-               $(".percent").html(e[2].wooScore);
+               percent.html(e[2].wooScore);
                if (e[2].wooScore >= 100) {
                    win(e);
                }
@@ -249,10 +252,10 @@ bark.click(function() {
                e[2].totalBarks++;
                e[2].wooScore += barkPts;
                moveProgress(barkPts);
-               $(".percent").html(e[2].wooScore);
+               percent.html(e[2].wooScore);
                if (e[2].wooScore < 0) {
                    e[2].wooScore = 0;
-                   $(".percent").html(0);
+                   percent.html(0);
                    wooAlert('Maybe you should try something else!');
                }
                if (e[2].totalBarks === 3 && maxBarks > 3 ) {
@@ -280,7 +283,7 @@ $('.close').click(function(event) {
   });
 
 function win(dogAndAdopter){
-    $(".percent").html(100);
+    percent.html(100);
     wooAlert(dogAndAdopter[1] + ' wants to adopt ' + dogAndAdopter[0] + '!');
     won = true;
 }
@@ -289,21 +292,33 @@ function moveProgress(widthChange){
    var totalBarWidth = parseInt($(".woobar").css('width'));
    var progWidth = parseInt($(".woobarprog").css('width'));
    var newWidth = (progWidth + (totalBarWidth*(widthChange/100))) + 'px';
-   $(".woobarprog").css('width', newWidth);
+   woodbarprog.css('width', newWidth);
 }
 
 function resetGame(){
-   $(".woobarprog").css('width',0);
-   $(".percent").html(0);
-   $("#sidebar").empty();
+   resetStyles();
+   resetData();
+   resetDisplay();
+}
+
+function resetStyles();
    game.css('opacity',.25);
-   $("#lick").css('opacity',1);
-   $("#cuddle").css('opacity',1);
-   $("#bark").css('opacity',1);
+   lick.css('opacity',1);
+   cuddle.css('opacity',1);
+   bark.css('opacity',1);
+   woobarprog.css('width',0);
+   selectplayer.fadeIn(750);
+}
+
+function resetData(){
    wooData = [{wooScore: 0, totalLicks: 0, totalCuddles: 0, totalBarks: 0}];
    wa =  cartesianProductOf(dogNames,adopterNames, wooData);
-   selectplayer.fadeIn(750);
    won = false;
+}
+
+function resetDisplay(){
+   percent.html(0);
+   sidebar.empty();
 }
 
 function wooAlert(alertMsg) {
@@ -317,8 +332,7 @@ function woof() {
 }
 
 
-// Cartesian Product function from:
-// http://stackoverflow.com/questions/12303989/cartesian-product-of-multiple-arrays-in-javascript
+/* Cartesian Product function from: http://stackoverflow.com/questions/12303989/cartesian-product-of-multiple-arrays-in-javascript  */
 
 function cartesianProductOf(a,b) {
     return _.reduce(arguments, function(a, b) {
