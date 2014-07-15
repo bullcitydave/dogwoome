@@ -311,7 +311,7 @@ function resetStyles() {
 }
 
 function resetData(){
-   Data = [{wooScore: 0, totalLicks: 0, totalCuddles: 0, totalBarks: 0}];
+   wooData = [{wooScore: 0, totalLicks: 0, totalCuddles: 0, totalBarks: 0}];
    wa =  cartesianProductOf(dogNames,adopterNames, wooData);
    won = false;
 }
