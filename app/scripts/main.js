@@ -43,30 +43,30 @@ function Adopter (name, options) {
 // DOGS
 
 var Moksha = new Dog("Moksha",{
-    color: ["brown","white"],
+    color: ["brown","black","white"],
     age: 4,
-    avatar: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/t31.0-8/1932629_10152418870378352_6293108892780372302_o.jpg'
+    avatar: 'images/moksha.jpg'
 });
 
-var Emmitt = new Dog("Emmitt",{
-    color: ["yellow"],
+var Cricket = new Dog("Cricket",{
+    color: ["yellow, white"],
     age: 5,
-    avatar: 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xap1/t1.0-9/60479_432375844549_1903986_n.jpg'
+    avatar: 'images/cricket.png'
 });
 
-var Bella = new Dog("Bella",{
-    color: ["black"],
-    age: 2,
-    avatar: 'https://scontent-b-lga.xx.fbcdn.net/hphotos-xfp1/t1.0-9/4541_89487809549_852660_n.jpg'
+var Nick = new Dog("Nick",{
+    color: ["black, white"],
+    age: 3,
+    avatar: 'images/nick.png'
 });
 
 var Herman = new Dog("Herman",{
     color: ["black","white"],
     age: 6,
-    avatar: 'http://i.imgur.com/s7mpWGj.jpg'
+    avatar: 'images/herman.png'
 });
 
-var Dogs = ([Moksha,Emmitt,Bella,Herman]);
+var Dogs = ([Moksha,Cricket,Nick,Herman]);
 
 var dogNames = Dogs.map(function (dog) {
     return dog.name;
