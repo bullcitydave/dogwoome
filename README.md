@@ -2,6 +2,7 @@
 ##Dave Seidman
 ###v0.1 - 2014 July 07
 
+<img alt="Screenshot" src="http://i.imgur.com/DEWTZfi.png" width="50%"/>
 
 ####Assignment
 Homework project for The Iron Yard Front End Engineering Boot Camp in Durham, NC.  Gist: to build a turn-based "monster mash" game. But why be so violent? Instead of attacking monsters, the players are dogs at the shelter, and their goal is to kill any doubts of would-be adopters. They'll need licks, cuddles, and even their barks to woo over the humans.
